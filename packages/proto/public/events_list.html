@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>SloBucketList</title>
+
+    <!-- Favicon
+    <link rel="icon" href="favicon.ico" />
+    -->
+
+    <!-- Design Tokens Styling -->
+    <link rel="stylesheet" href="/styles/tokens.css" />
+
+    <!-- Base Styling -->
+    <link rel="stylesheet" href="/styles/reset.css" />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Index Styling -->
+    <link rel="stylesheet" href="/styles/events_list.css" />
+</head>
+<body>
+<!-- Header / Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events_list.html">Events</a></li>
+            <li><a href="create_event.html">Create Event</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Events List -->
+<section id="events-list">
+    <div id="hero-container">
+        <div>
+            <h2>Events</h2>
+            <svg class="icon">
+                <use href="/assets/icons/events_icons.svg#icon-calendar"/>
+            </svg>
+        </div>
+        <p>Wednesday, Apr 9</p>
+    </div>
+    <ul id="events-list-list">
+        <li>
+            <div>
+                <img src="/assets/jazz_event.jpeg" alt="Jazz Night" width="25%" />
+                <a href="events/jazz_event.html"><p>Jazz Night</p></a>
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="/assets/food_event.jpeg" alt="Jazz Night" width="25%" />
+                <a href="events/food_event.html"><p>Free Food</p></a>
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="/assets/drinks_event.jpeg" alt="Jazz Night" width="25%" />
+                <a href="events/drinks_event.html"><p>Paid Food But Free Drinks</p></a>
+            </div>
+        </li>
+    </ul>
+</section>
+</body>
+</html>
