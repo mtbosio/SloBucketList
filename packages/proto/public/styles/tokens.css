@@ -13,6 +13,11 @@
     --color-success: #22c55e;           /* Green-500 */
     --color-warning: #f59e0b;           /* Amber-500 */
 
+    --text-primary: #2563eb;
+    --text-primary-hover: #1d4ed8;
+    --background-primary: #ffffff;
+
+
     /* Typography */
     --font-family-base: 'Inter', system-ui, sans-serif;
     --font-size-xs: 0.75rem;   /* 12px */
@@ -54,4 +59,10 @@
     --z-dropdown: 1000;
     --z-modal: 1100;
     --z-toast: 1200;
+}
+
+body.dark-mode {
+    --text-primary: #ffffff;
+    --text-primary-hover: #1d4ed8;
+    --background-primary: black;
 }
