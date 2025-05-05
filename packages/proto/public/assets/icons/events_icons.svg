@@ -9,7 +9,7 @@
             </g>
         </symbol>
 
-        <symbol id="icon-calendar" viewBox="0 0 24 24" fill="red" stroke="red">
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
             <rect class="cls-6374f8d9b67f094e4896c61a-1" x="1.48" y="3.37" width="21.04" height="4.78"></rect>
             <rect class="cls-6374f8d9b67f094e4896c61a-1" x="1.48" y="8.15" width="21.04" height="14.35"></rect>
             <line class="cls-6374f8d9b67f094e4896c61a-1" x1="5.3" y1="12.93" x2="7.22" y2="12.93"></line>
