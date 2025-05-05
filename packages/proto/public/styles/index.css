@@ -37,5 +37,6 @@
 }
 
 .icon{
-    fill: red;
+    stroke: var(--text-primary);
+    fill: var(--background-primary);
 }

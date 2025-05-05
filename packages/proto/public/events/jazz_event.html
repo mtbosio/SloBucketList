@@ -17,6 +17,9 @@
     <!-- Base Styling -->
     <link rel="stylesheet" href="/styles/reset.css" />
 
+    <!-- Nav Styling -->
+    <link href="/styles/nav.css" rel="stylesheet"/>
+
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +29,7 @@
     <link rel="stylesheet" href="/styles/event.css" />
 </head>
 <body>
+<script defer src="/js/toggle_dark_mode.js"></script>
 <!-- Header / Navigation -->
 <header>
     <nav>
@@ -33,6 +37,13 @@
             <li><a href="../index.html">Home</a></li>
             <li><a href="../events_list.html">Events</a></li>
             <li><a href="../create_event.html">Create Event</a></li>
+            <li class="dark-mode-switch">
+                <p>Dark Mode</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </li>
         </ul>
     </nav>
 </header>
