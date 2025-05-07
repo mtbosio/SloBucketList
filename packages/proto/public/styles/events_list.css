@@ -34,47 +34,9 @@ p, h2{
     align-items: center;
 }
 
-#events-list-list {
+event-feed {
     list-style: none;
-    margin: 0;
-    padding: 0;
     width: 50%;
-}
-
-#events-list-list li {
-    margin-bottom: 1rem;
-}
-
-#events-list-list li > div {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-primary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 1rem;
-    transition: box-shadow 0.2s ease;
-}
-
-#events-list-list li > div:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-#events-list-list li > div img {
-    flex: 0 0 20%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-right: 1rem;
-}
-
-#events-list-list li > div a p {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    text-align: center;
-    flex: 1;
-    color: var(--text-primary);
-    text-decoration: none;
 }
 
 .icon{
