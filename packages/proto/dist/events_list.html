@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>SloBucketList</title>
+
+    <!-- Favicon
+    <link rel="icon" href="favicon.ico" />
+    -->
+
+    <!-- Design Tokens Styling -->
+    <link rel="stylesheet" href="/styles/tokens.css" />
+
+    <!-- Base Styling -->
+    <link rel="stylesheet" href="/styles/reset.css" />
+
+    <!-- Nav Styling -->
+    <link href="/styles/nav.css" rel="stylesheet"/>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Index Styling -->
+    <link rel="stylesheet" href="/styles/events_list.css" />
+  <script type="module" crossorigin src="/assets/sub-DykN3WUu.js"></script>
+</head>
+<body>
+<script defer src="/js/toggle_dark_mode.js"></script>
+
+<!-- Header / Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events_list.html">Events</a></li>
+            <li><a href="create_event.html">Create Event</a></li>
+            <li class="dark-mode-switch">
+                <p>Dark Mode</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Events List -->
+<section id="events-list">
+    <div id="hero-container">
+        <div>
+            <h2>Events</h2>
+            <svg class="icon">
+                <use href="/assets/icons/events_icons.svg#icon-calendar"/>
+            </svg>
+        </div>
+        <p>Wednesday, Apr 9</p>
+    </div>
+    <event-feed src="/data/event-feed.json"></event-feed>
+</section>
+</body>
+</html>

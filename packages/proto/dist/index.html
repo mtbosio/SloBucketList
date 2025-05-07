@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+
+    <title>SloBucketList</title>
+
+    <!-- Favicon
+    <link rel="icon" href="favicon.ico" />
+    -->
+
+    <!-- Design Tokens Styling -->
+    <link href="/styles/tokens.css" rel="stylesheet"/>
+
+    <!-- Base Styling -->
+    <link href="/styles/reset.css" rel="stylesheet"/>
+
+    <!-- Nav Styling -->
+    <link href="/styles/nav.css" rel="stylesheet"/>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet">
+
+    <!-- Index Styling -->
+    <link href="/styles/index.css" rel="stylesheet"/>
+</head>
+<body>
+<script defer src="/js/toggle_dark_mode.js"></script>
+<!-- Header / Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events_list.html">Events</a></li>
+            <li><a href="create_event.html">Create Event</a></li>
+            <li class="dark-mode-switch">
+                <p>Dark Mode</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<section id="home">
+    <!-- Hero Section -->
+    <div id="hero-container">
+        <section id="hero">
+            <svg class="icon">
+                <use href="/assets/icons/events_icons.svg#icon-bucket"/>
+            </svg>
+
+            <div><h1>Welcome to the SloBucketList!</h1></div>
+            <div><p>Find, attend, and create local events in San Luis Obispo</p></div>
+        </section>
+    </div>
+</section>
+</body>
+</html>

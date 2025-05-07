@@ -1,0 +1,30 @@
+#event{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero-container{
+    width: 50%;
+    align-items: center;
+    background-color: var(--background-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 10px;
+    transition: box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+p, h2 {
+    color: var(--text-primary);
+}
+
+.icon{
+    stroke: var(--text-primary);
+    fill: var(--background-primary);
+}

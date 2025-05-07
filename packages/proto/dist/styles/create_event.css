@@ -1,0 +1,30 @@
+#event-form{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p, h2, label{
+    color: var(--text-primary);
+}
+
+#hero{
+    height: 30%;
+    padding: 20px;
+    margin: 10px;
+    align-items: flex-start;
+    background-color: var(--background-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: none;
+}
+
+.icon{
+    stroke: var(--text-primary);
+    fill: var(--background-primary);
+}
