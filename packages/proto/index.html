@@ -30,37 +30,31 @@
     <link href="/styles/index.css" rel="stylesheet"/>
 </head>
 <body>
-<script defer src="/js/toggle_dark_mode.js"></script>
-<!-- Header / Navigation -->
-<header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="events_list.html">Events</a></li>
-            <li><a href="create_event.html">Create Event</a></li>
-            <li class="dark-mode-switch">
-                <p>Dark Mode</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label>
-            </li>
-        </ul>
-    </nav>
-</header>
+    <script defer src="/js/toggle_dark_mode.js"></script>
+    <script type="module">
+        import { define, Auth } from "@calpoly/mustang";
+        import {HeaderElement} from "./src/header";
 
-<section id="home">
-    <!-- Hero Section -->
-    <div id="hero-container">
-        <section id="hero">
-            <svg class="icon">
-                <use href="/assets/icons/events_icons.svg#icon-bucket"/>
-            </svg>
+        define({
+            "slo-bucket-list-header": HeaderElement,
+            "mu-auth": Auth.Provider
+        });
+    </script>
+    <mu-auth provides="SloBucketList:auth">
+        <slo-bucket-list-header></slo-bucket-list-header>
+        <section id="home">
+            <!-- Hero Section -->
+            <div id="hero-container">
+                <section id="hero">
+                    <svg class="icon">
+                        <use href="/assets/icons/events_icons.svg#icon-bucket"/>
+                    </svg>
 
-            <div><h1>Welcome to the SloBucketList!</h1></div>
-            <div><p>Find, attend, and create local events in San Luis Obispo</p></div>
+                    <div><h1>Welcome to the SloBucketList!</h1></div>
+                    <div><p>Find, attend, and create local events in San Luis Obispo</p></div>
+                </section>
+            </div>
         </section>
-    </div>
-</section>
+    </mu-auth>
 </body>
 </html>

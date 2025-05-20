@@ -3,7 +3,7 @@ import {  state, property } from 'lit/decorators.js';
 import './event-item.ts';
 import reset from './styles/reset.css.ts';
 
-interface EventData {
+interface EventDataElement {
     imgSrc: string;
     alt: string;
     href: string;
@@ -15,7 +15,7 @@ export class EventFeed extends LitElement {
     src?: string;
 
     @state()
-    private events: EventData[] = [];
+    private events: EventDataElement[] = [];
 
     static styles = [
         reset.styles,
@@ -47,7 +47,7 @@ export class EventFeed extends LitElement {
                 return res.json();
             })
             .then((json: object) => {
-                this.events = json as Array<EventData>;
+                this.events = json as Array<EventDataElement>;
             })
             .catch((err) => {
                 console.error('Error hydrating event feed:', err);

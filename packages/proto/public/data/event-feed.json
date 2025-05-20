@@ -1,20 +1,29 @@
 [
   {
+    "eventId": "evt001",
+    "name": "Jazz Night",
+    "time": "2025-06-05T19:00:00",
+    "location": "Downtown SLO Amphitheater",
     "imgSrc": "/assets/jazz_event.jpeg",
     "alt": "Jazz Night",
-    "href": "events/jazz_event.html",
-    "name": "Jazz Night"
+    "href": "events/jazz_event.html"
   },
   {
+    "eventId": "evt002",
+    "name": "Free Food",
+    "time": "2025-06-06T12:00:00",
+    "location": "Cal Poly Campus - Dexter Lawn",
     "imgSrc": "/assets/food_event.jpeg",
     "alt": "Free Food",
-    "href": "events/food_event.html",
-    "name": "Free Food"
+    "href": "events/food_event.html"
   },
   {
+    "eventId": "evt003",
+    "name": "Paid Food But Free Drinks",
+    "time": "2025-06-07T18:30:00",
+    "location": "Mission Plaza, San Luis Obispo",
     "imgSrc": "/assets/drinks_event.jpeg",
     "alt": "Paid Food But Free Drinks",
-    "href": "events/drinks_event.html",
-    "name": "Paid Food But Free Drinks"
+    "href": "events/drinks_event.html"
   }
 ]

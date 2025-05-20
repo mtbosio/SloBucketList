@@ -10,5 +10,11 @@
   "license": "ISC",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.18"
+  }
 }
