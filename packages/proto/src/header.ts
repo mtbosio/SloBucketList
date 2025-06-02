@@ -20,7 +20,6 @@ export class HeaderElement extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-
         this._authObserver.observe((auth: Auth.Model) => {
             const { user } = auth;
 
@@ -170,6 +169,11 @@ export class HeaderElement extends LitElement {
     `;
     }
 
+    private _onToggle(e: Event) {
+        const checked = (e.target as HTMLInputElement).checked;
+        document.body.classList.toggle('dark-mode', checked);
+    }
+
     override render() {
         return html`
             
@@ -184,7 +188,7 @@ export class HeaderElement extends LitElement {
                         <li class="dark-mode-switch">
                             <p>Dark Mode</p>
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" @change=${this._onToggle}>
                                 <span class="slider"></span>
                             </label>
                         </li>

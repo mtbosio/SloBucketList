@@ -33,7 +33,7 @@
         import {HeaderElement} from "./src/header";
         import { EventFeed } from "/src/event-feed.ts";
         import { EventItemElement } from "/src/event-item.ts";
-        import { LoginFormElement } from "/src/auth/login-form";
+        import { SignupFormElement } from "/src/auth/signup-form";
 
 
         define({
@@ -41,16 +41,16 @@
             "mu-auth": Auth.Provider,
             "event-feed": EventFeed,
             "event-item": EventItemElement,
-            "login-form": LoginFormElement
+            "signup-form": SignupFormElement
         });
     </script>
 </head>
 <body class="page">
 <mu-auth provides="SloBucketList:auth">
     <slo-bucket-list-header></slo-bucket-list-header>
-    <h2>User Login</h2>
-    <main id="home">
-        <login-form api="http://localhost:3000/auth/login">
+    <h2>User Signup</h2>
+    <main class="card">
+        <signup-form api="http://localhost:3000/auth/register">
             <label>
                 <span>Username:</span>
                 <input name="username" autocomplete="off" />
@@ -59,13 +59,12 @@
                 <span>Password:</span>
                 <input type="password" name="password" />
             </label>
-        </login-form>
+        </signup-form>
     </main>
     <p
     >Or did you want to
-        <a href="register.html">Sign up as a new user</a>?
+        <a href="login.html">Log in</a>?
     </p>
-
 </mu-auth>
 </body>
 </html>

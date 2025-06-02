@@ -26,46 +26,41 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
     <!-- Index Styling -->
-    <link rel="stylesheet" href="/styles/events_list.css" />
+    <link rel="stylesheet" href="/styles/create_event.css" />
 
     <script type="module">
         import { define, Auth } from "@calpoly/mustang";
         import {HeaderElement} from "./src/header";
-        import { EventFeed } from "/src/event-feed.ts";
-        import { EventItemElement } from "/src/event-item.ts";
-        import { LoginFormElement } from "/src/auth/login-form";
-
 
         define({
             "slo-bucket-list-header": HeaderElement,
-            "mu-auth": Auth.Provider,
-            "event-feed": EventFeed,
-            "event-item": EventItemElement,
-            "login-form": LoginFormElement
+            "mu-auth": Auth.Provider
         });
     </script>
 </head>
-<body class="page">
-<mu-auth provides="SloBucketList:auth">
-    <slo-bucket-list-header></slo-bucket-list-header>
-    <h2>User Login</h2>
-    <main id="home">
-        <login-form api="http://localhost:3000/auth/login">
-            <label>
-                <span>Username:</span>
-                <input name="username" autocomplete="off" />
-            </label>
-            <label>
-                <span>Password:</span>
-                <input type="password" name="password" />
-            </label>
-        </login-form>
-    </main>
-    <p
-    >Or did you want to
-        <a href="register.html">Sign up as a new user</a>?
-    </p>
+<body>
+<!-- Create Event Form -->
+    <mu-auth provides="SloBucketList:auth">
+        <slo-bucket-list-header></slo-bucket-list-header>
+            <section id="event-form">
+                <div id="hero">
+                    <h2>Submit an Event</h2>
+                    <p>Enter Event Details</p>
 
-</mu-auth>
+                    <form>
+                        <label for="fname">First name:</label><br />
+                        <input type="text" id="fname" name="fname"><br />
+                        <label for="lname">Last name:</label><br />
+                        <input type="text" id="lname" name="lname"><br />
+                        <label for="eventName">Event title:</label><br />
+                        <input type="text" id="eventName" name="eventName"><br />
+                        <label for="description">Event description:</label><br />
+                        <input type="text" id="description" name="description"><br />
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </section>`
+    </mu-auth>
 </body>
 </html>

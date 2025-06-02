@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import {  state, property } from 'lit/decorators.js';
 import './event-item.ts';
 import reset from './styles/reset.css.ts';
+import {Auth, Observer} from "@calpoly/mustang";
 
 interface EventDataElement {
     imgSrc: string;
@@ -17,6 +18,9 @@ export class EventFeed extends LitElement {
     @state()
     private events: EventDataElement[] = [];
 
+    _authObserver = new Observer<Auth.Model>(this, "SloBucketList:auth");
+    _user?: Auth.User;
+
     static styles = [
         reset.styles,
         css`
@@ -29,17 +33,32 @@ export class EventFeed extends LitElement {
     
             #events-list-list li {
                 margin-bottom: 1rem;
-            }
-    `];
+            }  `
+    ];
 
     connectedCallback() {
         super.connectedCallback();
-        if (this.src) this.hydrate(this.src);
+        this._authObserver.observe((auth: Auth.Model) => {
+            this._user= auth.user;
+
+        }).then(() => {
+            if (this.src) this.hydrate(this.src);
+        });
+
+    }
+
+    get authorization(): Record<string,string> | undefined {
+        if (this._user?.authenticated) {
+            return {
+                Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`
+            }
+        }
+        return undefined
     }
 
 
     hydrate(src: string) {
-        fetch(src)
+        fetch(src, { headers: this.authorization })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`Failed to fetch: ${res.status}`);

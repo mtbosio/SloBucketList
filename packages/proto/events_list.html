@@ -27,56 +27,38 @@
 
     <!-- Index Styling -->
     <link rel="stylesheet" href="/styles/events_list.css" />
+
+    <script type="module">
+        import { define, Auth } from "@calpoly/mustang";
+        import {HeaderElement} from "./src/header";
+        import { EventFeed } from "/src/event-feed.ts";
+        import { EventItemElement } from "/src/event-item.ts";
+
+        define({
+            "slo-bucket-list-header": HeaderElement,
+            "mu-auth": Auth.Provider,
+            "event-feed": EventFeed,
+            "event-item": EventItemElement,
+        });
+    </script>
 </head>
 <body>
-<script defer src="/js/toggle_dark_mode.js"></script>
-<script type="module">
-    import { define } from "@calpoly/mustang";
-    import { EventItemElement } from "/src/event-item.ts";
-
-    define({
-        "event-item": EventItemElement
-    });
-</script>
-<script type="module">
-    import { define } from "@calpoly/mustang";
-    import { EventFeed } from "/src/event-feed.ts";
-
-    define({
-        "event-feed": EventFeed
-    });
-</script>
-
-<!-- Header / Navigation -->
-<header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="events_list.html">Events</a></li>
-            <li><a href="create_event.html">Create Event</a></li>
-            <li class="dark-mode-switch">
-                <p>Dark Mode</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label>
-            </li>
-        </ul>
-    </nav>
-</header>
 
 <!-- Events List -->
-<section id="events-list">
-    <div id="hero-container">
-        <div>
-            <h2>Events</h2>
-            <svg class="icon">
-                <use href="/assets/icons/events_icons.svg#icon-calendar"/>
-            </svg>
-        </div>
-        <p>Wednesday, Apr 9</p>
-    </div>
-    <event-feed src="http://localhost:3000/api/events"></event-feed>
-</section>
+    <mu-auth provides="SloBucketList:auth">
+        <slo-bucket-list-header></slo-bucket-list-header>
+        <section id="events-list">
+            <div id="hero-container">
+                <div>
+                    <h2>Events</h2>
+                    <svg class="icon">
+                        <use href="/assets/icons/events_icons.svg#icon-calendar"/>
+                    </svg>
+                </div>
+                <p>Wednesday, Apr 9</p>
+            </div>
+            <event-feed src="http://localhost:3000/api/events"></event-feed>
+        </section>
+    </mu-auth>
 </body>
 </html>

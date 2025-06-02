@@ -28,9 +28,7 @@
 
     <!-- Index Styling -->
     <link href="/styles/index.css" rel="stylesheet"/>
-</head>
-<body>
-    <script defer src="/js/toggle_dark_mode.js"></script>
+
     <script type="module">
         import { define, Auth } from "@calpoly/mustang";
         import {HeaderElement} from "./src/header";
@@ -40,6 +38,9 @@
             "mu-auth": Auth.Provider
         });
     </script>
+</head>
+<body>
+
     <mu-auth provides="SloBucketList:auth">
         <slo-bucket-list-header></slo-bucket-list-header>
         <section id="home">
