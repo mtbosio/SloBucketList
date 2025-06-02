@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
-import reset from './styles/reset.css.ts';
+import reset from '../styles/reset.css.ts';
 
 export class EventItemElement extends LitElement {
 

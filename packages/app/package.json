@@ -2,18 +2,21 @@
   "name": "app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server dist -p 3000",
+    "dev": "npx vite",
+    "build": "npx tsc && npx vite build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@calpoly/mustang": "^1.0.15",
+    "@calpoly/mustang": "^0.1.13",
     "lit": "^3.3.0"
   },
   "devDependencies": {
-    "tsc": "^2.0.4",
+    "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }
 }

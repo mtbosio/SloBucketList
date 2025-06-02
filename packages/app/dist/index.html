@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+
+    <title>SloBucketList</title>
+
+    <!-- Favicon
+    <link rel="icon" href="favicon.ico" />
+    -->
+
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet">
+
+    <!-- Index Styling -->
+    <link href="/styles/tokens.css" rel="stylesheet"/>
+    <!-- Reset Styling -->
+    <link href="/styles/reset.css" rel="stylesheet"/>
+
+  <script type="module" crossorigin src="/assets/main-ckNSoMcY.js"></script>
+</head>
+<body>
+    <mu-history provides="SloBucketList:history">
+        <mu-auth provides="SloBucketList:auth">
+            <article class="page">
+                <slo-bucket-list-header></slo-bucket-list-header>
+                <mu-switch></mu-switch>
+            </article>
+        </mu-auth>
+    </mu-history>
+</body>
+</html>

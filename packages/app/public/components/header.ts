@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { state } from 'lit/decorators.js';
 import { Observer, Auth, Events } from "@calpoly/mustang";
-import reset from './styles/reset.css.ts';
+import reset from '../styles/reset.css.ts'
 
-export class HeaderElement2 extends LitElement {
+export class HeaderElement extends LitElement {
 
     static initializeOnce() {
         // No global initialization needed for now
@@ -58,6 +58,19 @@ export class HeaderElement2 extends LitElement {
                     text-align: center;
                     padding: 14px 16px;
                     text-decoration: none;
+                }
+                
+                li button {
+                    display: block;
+                    color: var(--text-primary);
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+
+                li button:hover {
+                    background-color: var(--text-primary-hover);
+                    color: white;
                 }
 
                 li a:hover {
@@ -162,7 +175,7 @@ export class HeaderElement2 extends LitElement {
     renderSignInButton() {
         return html`
         <li>
-            <a href="/login.html">
+            <a href="/login">
               Sign In…
             </a>
         </li>
@@ -180,9 +193,9 @@ export class HeaderElement2 extends LitElement {
             <header>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="events_list.html">Events</a></li>
-                        <li><a href="create_event.html">Create Event</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/create-event">Create Event</a></li>
                         
                         
                         <li class="dark-mode-switch">

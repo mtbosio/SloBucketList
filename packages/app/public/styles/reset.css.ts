@@ -23,7 +23,6 @@ const styles = css`
         font-weight: var(--font-weight-normal);
         font-family: var(--font-family-base), serif;
     }
-    
 
 `;
 
