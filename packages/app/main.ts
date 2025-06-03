@@ -2,9 +2,13 @@ import {
     Auth,
     define,
     History,
-    Switch
+    Switch,
+    Store
 } from "@calpoly/mustang";
 import { html, LitElement } from "lit";
+import { Msg } from "./public/messages";
+import { Model, init } from "./public/model";
+import update from "./public/update";
 import { HeaderElement } from "./public/components/header";
 import { LoginView} from "./public/views/login-view";
 import { RegisterView } from "./public/views/register-view";
@@ -13,6 +17,13 @@ import {EventsView} from "./public/views/events-view";
 import {CreateEventView} from "./public/views/create-event-view";
 
 define({
+    "mu-store": class AppStore
+        extends Store.Provider<Model, Msg>
+    {
+        constructor() {
+            super(update, init, "SloBucketList:auth");
+        }
+    },
     "home-view": HomeViewElement,
     "login-view": LoginView,
     "register-view": RegisterView,
@@ -21,7 +32,6 @@ define({
 })
 
 const routes = [
-
     {
         path: "/app",
         view: () => html`
@@ -47,7 +57,10 @@ const routes = [
     {
         path: "/create-event",
         view: () => html`
-      <create-event-view></create-event-view>
+            <create-event-view
+                    api="/api/events"
+                    redirect="/events"
+            ></create-event-view>
     `
     },
     {

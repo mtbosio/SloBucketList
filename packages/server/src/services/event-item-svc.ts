@@ -26,7 +26,7 @@ function index(): Promise<EventItem[]> {
 function get(eventId: String): Promise<EventItem> {
         return EventItemModel.find({ eventId })
             .then((list) => list[0])
-            .catch((err) => {
+            .catch(() => {
                     throw `${eventId} Not Found`;
             });
 }

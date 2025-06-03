@@ -21,6 +21,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var index_exports = {};
+module.exports = __toCommonJS(index_exports);
 var import_express = __toESM(require("express"));
 var import_mongo = require("./services/mongo");
 var import_events = __toESM(require("./routes/events"));
@@ -35,7 +38,7 @@ const staticDir = process.env.STATIC || "public";
 app.use((0, import_cors.default)());
 app.use(import_express.default.static(staticDir));
 app.use(import_express.default.json());
-app.use("/app", (req, res) => {
+app.use("/app", (res) => {
   const indexHtml = import_path.default.resolve(staticDir, "index.html");
   import_promises.default.readFile(indexHtml, { encoding: "utf8" }).then(
     (html) => res.send(html)

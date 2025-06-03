@@ -42,7 +42,7 @@ function index() {
   return EventItemModel.find();
 }
 function get(eventId) {
-  return EventItemModel.find({ eventId }).then((list) => list[0]).catch((err) => {
+  return EventItemModel.find({ eventId }).then((list) => list[0]).catch(() => {
     throw `${eventId} Not Found`;
   });
 }

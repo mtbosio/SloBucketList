@@ -10,7 +10,7 @@ export class HeaderElement extends LitElement {
     }
 
     // Auth observer
-    _authObserver = new Observer<Auth.Model>(this, "SloBucketList:auth");
+    private _authObserver!: Observer<Auth.Model>;
 
     @state()
     loggedIn = false;
@@ -20,6 +20,9 @@ export class HeaderElement extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
+
+        this._authObserver = new Observer<Auth.Model>(this, "SloBucketList:auth");
+
         this._authObserver.observe((auth: Auth.Model) => {
             const { user } = auth;
 

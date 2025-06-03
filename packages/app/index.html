@@ -28,10 +28,14 @@
 <body>
     <mu-history provides="SloBucketList:history">
         <mu-auth provides="SloBucketList:auth">
-            <article class="page">
-                <slo-bucket-list-header></slo-bucket-list-header>
-                <mu-switch></mu-switch>
-            </article>
+            <mu-store provides="SloBucketList:model">
+
+                    <article class="page">
+                        <slo-bucket-list-header></slo-bucket-list-header>
+                        <mu-switch></mu-switch>
+                    </article>
+
+            </mu-store>
         </mu-auth>
     </mu-history>
 </body>

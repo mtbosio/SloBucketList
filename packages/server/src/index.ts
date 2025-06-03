@@ -1,5 +1,7 @@
 // public/index.ts
-import express, { Request, Response } from "express";
+import express, { Response } from "express";
+export type {Credential} from "./models/credential";
+export type {EventItem} from "./models/event-item";
 import { connect } from "./services/mongo";
 import events from "./routes/events";
 import cors from "cors";
@@ -17,7 +19,7 @@ app.use(cors());
 app.use(express.static(staticDir));
 app.use(express.json());
 
-app.use("/app", (req: Request, res: Response) => {
+app.use("/app", (res: Response) => {
     const indexHtml = path.resolve(staticDir, "index.html");
     fs.readFile(indexHtml, { encoding: "utf8" }).then((html) =>
         res.send(html)

@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import { EventItem } from "../models/event-item";
 
 import Events from "../services/event-item-svc";
-import {EventFeed} from "proto/src/event-feed";
 
 const router = express.Router();
 
@@ -36,7 +35,7 @@ router.put("/:eventId", (req: Request, res: Response) => {
 
     Events.update(eventId, newEvent)
         .then((event: EventItem) => res.json(event))
-        .catch((err) => res.status(404).end());
+        .catch(() => res.status(404).end());
 });
 
 router.delete("/:eventId", (req: Request, res: Response) => {

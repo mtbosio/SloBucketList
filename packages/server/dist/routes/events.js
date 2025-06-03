@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
 router.put("/:eventId", (req, res) => {
   const { eventId } = req.params;
   const newEvent = req.body;
-  import_event_item_svc.default.update(eventId, newEvent).then((event) => res.json(event)).catch((err) => res.status(404).end());
+  import_event_item_svc.default.update(eventId, newEvent).then((event) => res.json(event)).catch(() => res.status(404).end());
 });
 router.delete("/:eventId", (req, res) => {
   const { eventId } = req.params;
