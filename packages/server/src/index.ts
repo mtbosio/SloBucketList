@@ -1,5 +1,5 @@
 // public/index.ts
-import express, { Response } from "express";
+import express from "express";
 export type {Credential} from "./models/credential";
 export type {EventItem} from "./models/event-item";
 import { connect } from "./services/mongo";
@@ -19,11 +19,14 @@ app.use(cors());
 app.use(express.static(staticDir));
 app.use(express.json());
 
-app.use("/app", (res: Response) => {
+app.use("/app", (_req, res) => {
     const indexHtml = path.resolve(staticDir, "index.html");
-    fs.readFile(indexHtml, { encoding: "utf8" }).then((html) =>
-        res.send(html)
-    );
+    fs.readFile(indexHtml, { encoding: "utf8" })
+        .then((html) => res.send(html))
+        .catch((err) => {
+            console.error("Error loading index.html:", err);
+            res.status(500).send("Server error");
+        });
 });
 
 app.use("/api/events", authenticateUser, events);

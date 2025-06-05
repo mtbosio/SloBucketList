@@ -25,12 +25,12 @@ var import_mongoose = require("mongoose");
 const EventItemScheme = new import_mongoose.Schema(
   {
     eventId: { type: String, required: true, trim: true },
-    imgSrc: { type: String, required: true, trim: true },
-    alt: { type: String, required: true, trim: true },
-    href: { type: String, required: true, trim: true },
+    creator: { type: String, required: true },
     name: { type: String, required: true, trim: true },
     location: { type: String, required: true, trim: true },
-    time: { type: String, required: true, trim: true }
+    time: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
+    rsvps: [{ type: import_mongoose.Types.ObjectId, ref: "Credential", default: [] }]
   },
   { collection: "events" }
 );
@@ -39,11 +39,26 @@ const EventItemModel = (0, import_mongoose.model)(
   EventItemScheme
 );
 function index() {
-  return EventItemModel.find();
+  return EventItemModel.find().populate("rsvps", "username").exec().then((docs) => {
+    return docs.map((doc) => {
+      const o = doc.toObject();
+      o.rsvps = o.rsvps.map((user) => ({
+        _id: user._id.toString(),
+        username: user.username
+      }));
+      return o;
+    });
+  });
 }
 function get(eventId) {
-  return EventItemModel.find({ eventId }).then((list) => list[0]).catch(() => {
-    throw `${eventId} Not Found`;
+  return EventItemModel.findOne({ eventId }).populate("rsvps", "username").exec().then((doc) => {
+    if (!doc) throw `${eventId} Not Found`;
+    const result = doc.toObject();
+    result.rsvps = result.rsvps.map((user) => ({
+      _id: user._id.toString(),
+      username: user.username
+    }));
+    return result;
   });
 }
 function create(json) {
@@ -65,4 +80,55 @@ function remove(eventId) {
     }
   );
 }
-var event_item_svc_default = { index, get, create, update, remove };
+function findByCreator(creatorId) {
+  let objId;
+  try {
+    objId = new import_mongoose.Types.ObjectId(creatorId);
+  } catch {
+    return Promise.resolve([]);
+  }
+  return EventItemModel.find({ creator: objId }).exec();
+}
+function addRsvp(eventId, userId) {
+  let objUserId;
+  try {
+    objUserId = new import_mongoose.Types.ObjectId(userId);
+  } catch {
+    return Promise.reject(new Error("Invalid userId"));
+  }
+  return EventItemModel.findOneAndUpdate(
+    { eventId },
+    { $addToSet: { rsvps: objUserId } },
+    // push only if not already in the array
+    { new: true }
+  ).exec().then((updated) => {
+    if (!updated) throw new Error(`Event ${eventId} not found`);
+    return updated;
+  });
+}
+function removeRsvp(eventId, userId) {
+  let objUserId;
+  try {
+    objUserId = new import_mongoose.Types.ObjectId(userId);
+  } catch {
+    return Promise.reject(new Error("Invalid userId"));
+  }
+  return EventItemModel.findOneAndUpdate(
+    { eventId },
+    { $pull: { rsvps: objUserId } },
+    { new: true }
+  ).exec().then((updated) => {
+    if (!updated) throw new Error(`Event ${eventId} not found`);
+    return updated;
+  });
+}
+var event_item_svc_default = {
+  index,
+  get,
+  create,
+  update,
+  remove,
+  findByCreator,
+  addRsvp,
+  removeRsvp
+};

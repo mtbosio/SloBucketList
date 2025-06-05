@@ -19,6 +19,14 @@ router.get("/:eventId", (req: Request, res: Response) => {
         .catch((err) => res.status(404).send(err));
 });
 
+router.get("/creator/:creatorId", (req: Request, res: Response) => {
+    const { creatorId } = req.params;
+
+    Events.findByCreator(creatorId)
+        .then((list: EventItem[]) => res.json(list))
+        .catch((err) => res.status(500).send(err));
+});
+
 router.post("/", (req: Request, res: Response) => {
     const newEvent = req.body;
 
@@ -45,5 +53,27 @@ router.delete("/:eventId", (req: Request, res: Response) => {
         .then(() => res.status(204).end())
         .catch((err) => res.status(404).send(err));
 });
+
+router.post(
+    "/:eventId/rsvp/:userId",
+    (req: Request, res: Response) => {
+        const { eventId, userId } = req.params;
+
+        Events.addRsvp(eventId, userId)
+            .then((updatedEvent) => res.json(updatedEvent))
+            .catch((err) => res.status(400).send(err.message));
+    }
+);
+
+router.delete(
+    "/:eventId/rsvp/:userId",
+    (req: Request, res: Response) => {
+        const { eventId, userId } = req.params;
+
+        Events.removeRsvp(eventId, userId)
+            .then((updatedEvent) => res.json(updatedEvent))
+            .catch((err) => res.status(400).send(err.message));
+    }
+);
 
 export default router;

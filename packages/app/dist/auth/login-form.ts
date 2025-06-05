@@ -49,10 +49,15 @@ export class LoginFormElement extends LitElement {
         reset.styles,
         css`
       .error:not(:empty) {
-        color: var(--color-error);
-        border: 1px solid var(--color-error);
-        padding: 3px;
+          color: var(--color-error);
+          border: 1px solid var(--color-error);
+          padding: 3px;
       }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+      
   `];
 
     handleChange(event: InputEvent) {

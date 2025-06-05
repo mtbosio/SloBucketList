@@ -15,6 +15,8 @@ import { RegisterView } from "./public/views/register-view";
 import {HomeViewElement} from "./public/views/home-view";
 import {EventsView} from "./public/views/events-view";
 import {CreateEventView} from "./public/views/create-event-view";
+import { EventDetailView } from "./public/views/event-detail-view";
+import {MyEventDetailView} from "./public/views/my-event-detail-view";
 
 define({
     "mu-store": class AppStore
@@ -29,6 +31,8 @@ define({
     "register-view": RegisterView,
     "events-view": EventsView,
     "create-event-view": CreateEventView,
+    "event-detail-view": EventDetailView,
+    "my-event-detail-view": MyEventDetailView
 })
 
 const routes = [
@@ -43,30 +47,48 @@ const routes = [
         redirect: "/app"
     },
     {
-        path: "/login",
+        path: "/app/login",
         view: () => html`
       <login-view></login-view>
     `
     },
     {
-        path: "/register",
+        path: "/app/register",
         view: () => html`
       <register-view></register-view>
     `
     },
     {
-        path: "/create-event",
+        path: "/app/create-event",
         view: () => html`
             <create-event-view
                     api="/api/events"
-                    redirect="/events"
+                    redirect="/app/events"
             ></create-event-view>
     `
     },
     {
-        path: "/events",
+        path: "/app/events",
         view: () => html`
-      <events-view></events-view>
+      <events-view mode="all"></events-view>
+    `
+    },
+    {
+        path: "/app/events/:eventId",
+        view: ({ eventId }: { eventId: string }) => html`
+            <event-detail-view eventId="${eventId}"></event-detail-view>
+          `,
+    },
+    {
+        path: "/app/my-events/:eventId",
+        view: ({ eventId }: { eventId: string }) => html`
+            <my-event-detail-view eventId="${eventId}"></my-event-detail-view>
+          `,
+    },
+    {
+        path: "/app/my-events",
+        view: () => html`
+      <events-view mode="mine"></events-view>
     `
     },
 ];

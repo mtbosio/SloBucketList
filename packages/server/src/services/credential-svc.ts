@@ -42,28 +42,22 @@ function create(username: string, password: string): Promise<Credential> {
         );
 }
 
-function verify(username: string, password: string)
-    : Promise<string>
-{
-    return credentialModel
-        .find({ username })
-        .then((found) => {
-            if (!found || found.length !== 1)
-                throw "Invalid username or password";
-            return found[0];
-        })
-        .then(
-            (credsOnFile : Credential) =>
-                bcrypt.compare(
-                    password,
-                    credsOnFile.hashedPassword
-                )
-                    .then((result: boolean) => {
-                        if (!result)
-                            throw("Invalid username or password");
-                        return credsOnFile.username;
-                    })
-        );
+function verify(
+    username: string,
+    password: string
+): Promise<{ userId: string; username: string }> {
+    return credentialModel.findOne({ username }).then((credsOnFile) => {
+        if (!credsOnFile) throw "Invalid username or password";
+
+        return bcrypt.compare(password, credsOnFile.hashedPassword).then((ok) => {
+            if (!ok) throw "Invalid username or password";
+
+            return {
+                userId: credsOnFile._id.toString(),
+                username: credsOnFile.username,
+            };
+        });
+    });
 }
 
 export default { create, verify };

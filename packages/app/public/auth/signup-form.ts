@@ -53,6 +53,10 @@ export class SignupFormElement extends LitElement {
         border: 1px solid var(--color-error);
         padding: 3px;
       }
+            form {
+                display: flex;
+                flex-direction: column;
+            }
   `];
 
     handleChange(event: InputEvent) {

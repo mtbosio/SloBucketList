@@ -65,19 +65,15 @@ function create(username, password) {
   );
 }
 function verify(username, password) {
-  return credentialModel.find({ username }).then((found) => {
-    if (!found || found.length !== 1)
-      throw "Invalid username or password";
-    return found[0];
-  }).then(
-    (credsOnFile) => import_bcryptjs.default.compare(
-      password,
-      credsOnFile.hashedPassword
-    ).then((result) => {
-      if (!result)
-        throw "Invalid username or password";
-      return credsOnFile.username;
-    })
-  );
+  return credentialModel.findOne({ username }).then((credsOnFile) => {
+    if (!credsOnFile) throw "Invalid username or password";
+    return import_bcryptjs.default.compare(password, credsOnFile.hashedPassword).then((ok) => {
+      if (!ok) throw "Invalid username or password";
+      return {
+        userId: credsOnFile._id.toString(),
+        username: credsOnFile.username
+      };
+    });
+  });
 }
 var credential_svc_default = { create, verify };

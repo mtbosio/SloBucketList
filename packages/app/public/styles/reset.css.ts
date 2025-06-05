@@ -24,6 +24,10 @@ const styles = css`
         font-family: var(--font-family-base), serif;
     }
 
+    mu-form::part(form) {
+        display: block;
+    }
+
 `;
 
 export default { styles };

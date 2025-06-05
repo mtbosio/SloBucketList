@@ -38,11 +38,12 @@ const staticDir = process.env.STATIC || "public";
 app.use((0, import_cors.default)());
 app.use(import_express.default.static(staticDir));
 app.use(import_express.default.json());
-app.use("/app", (res) => {
+app.use("/app", (_req, res) => {
   const indexHtml = import_path.default.resolve(staticDir, "index.html");
-  import_promises.default.readFile(indexHtml, { encoding: "utf8" }).then(
-    (html) => res.send(html)
-  );
+  import_promises.default.readFile(indexHtml, { encoding: "utf8" }).then((html) => res.send(html)).catch((err) => {
+    console.error("Error loading index.html:", err);
+    res.status(500).send("Server error");
+  });
 });
 app.use("/api/events", import_auth.authenticateUser, import_events.default);
 app.use("/auth", import_auth.default);

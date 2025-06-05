@@ -1,25 +1,11 @@
-import { LitElement, html, css } from 'lit';
-import {  state, property } from 'lit/decorators.js';
 import './event-item.ts';
 import reset from '../styles/reset.css.ts';
-import {Auth, Observer} from "@calpoly/mustang";
+import {View} from "@calpoly/mustang";
+import {Model} from "../model.ts";
+import {Msg} from "../messages.ts";
+import {css, html} from "lit";
 
-interface EventDataElement {
-    imgSrc: string;
-    alt: string;
-    href: string;
-    name: string;
-}
-
-export class EventFeed extends LitElement {
-    @property()
-    src?: string;
-
-    @state()
-    private events: EventDataElement[] = [];
-
-    _authObserver = new Observer<Auth.Model>(this, "SloBucketList:auth");
-    _user?: Auth.User;
+export class EventFeed extends View<Model, Msg> {
 
     static styles = [
         reset.styles,
@@ -36,59 +22,36 @@ export class EventFeed extends LitElement {
             }  `
     ];
 
+    constructor() {
+        super("SloBucketList:model");
+    }
+
     connectedCallback() {
         super.connectedCallback();
-        this._authObserver.observe((auth: Auth.Model) => {
-            this._user= auth.user;
-
-        }).then(() => {
-            if (this.src) this.hydrate(this.src);
-        });
-
-    }
-
-    get authorization(): Record<string,string> | undefined {
-        if (this._user?.authenticated) {
-            return {
-                Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`
-            }
-        }
-        return undefined
-    }
-
-
-    hydrate(src: string) {
-        fetch(src, { headers: this.authorization })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`Failed to fetch: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then((json: object) => {
-                this.events = json as Array<EventDataElement>;
-            })
-            .catch((err) => {
-                console.error('Error hydrating event feed:', err);
-            });
+        this.dispatchMessage([
+            "events/load-all",
+            {
+                onSuccess: () => console.log("Loaded all events"),
+                onFailure: (err) => console.error(err),
+            },
+        ]);
     }
 
     override render() {
         return html`
-      <ul id="events-list-list">
-        ${this.events.map(
-            (event) => html`
-                <li>
-                    <event-item
-                            img-src=${event.imgSrc}
-                            alt=${event.alt}
-                            href=${event.href}
+            <ul id="events-list-list">
+                ${this.model.allEvents.map(
+                    (event) => html`
+                    <li>
+                        <event-item
+                            eventId=${event.eventId}
                             name=${event.name}
-                    ></event-item>
-                </li>
-            `
-        )}
-      </ul>
-    `;
+                            location=${event.location}
+                            time=${event.time}
+                            description=${event.description}
+                        ></event-item>
+                    </li>
+                `)}
+          </ul>`;
     }
 }

@@ -1,70 +1,96 @@
+// src/components/event-item.ts
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 import reset from '../styles/reset.css.ts';
 
 export class EventItemElement extends LitElement {
-
-    @property({ attribute: 'img-public' })
-    imgSrc?: string;
-
-    /** Alt text for the image */
-    @property()
-    alt?: string;
-
-    /** Link to the event detail page */
-    @property()
-    href?: string;
-
-    @property()
-    name?: string;
+    @property({ type: String }) eventId?: string;
+    @property({ type: String }) name?: string;
+    @property({ type: String }) location?: string;
+    @property({ type: String }) time?: string;
+    @property({ type: String }) description?: string;
+    @property({ type: String }) mode: "all" | "mine" = "all";
 
     static styles = [
         reset.styles,
         css`
-            p, h2{
-                color: var(--text-primary);
-            }
-            
+      .event-card {
+        display: flex;
+        flex-direction: column;
+          background-color: var(--background-secondary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 1rem;
+        transition: box-shadow 0.2s ease;
+        gap: 0.5rem;
+      }
+      .event-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+          
+      }
 
-            div {
-                display: flex;
-                align-items: center;
-                background-color: var(--background-primary);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-                padding: 1rem;
-                transition: box-shadow 0.2s ease;
-            }
+      .event-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+      }
 
-            div:hover {
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            }
+      .event-title {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
 
-            div img {
-                flex: 0 0 20%;
-                height: auto;
-                object-fit: cover;
-                border-radius: 4px;
-                margin-right: 1rem;
-            }
+      .event-time,
+      .event-location {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+      }
 
-             div a p {
-                margin: 0;
-                font-size: 1.25rem;
-                font-weight: 600;
-                text-align: center;
-                flex: 1;
-                color: var(--text-primary);
-                text-decoration: none;
-            }
-    `];
+      .event-description {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text-primary);
+        line-height: var(--line-height-base);
+      }
+    `,
+    ];
 
     override render() {
+        const detailUrl = this.eventId ? this.mode === "all" ? `/app/events/${this.eventId}` : `/app/my-events/${this.eventId}` : '#';
+
         return html`
-            <div>
-                <img src="${this.imgSrc}" alt="${this.alt} width="25%" />
-                <a href="${this.href}"><p>${this.name}</p></a>
+            <div class="event-card">
+                <div class="event-header">
+                    <!-- Click the title to navigate to /events/<eventId> -->
+                    <a class="event-title" href="${detailUrl}">
+                        ${this.name ?? ''}
+                    </a>
+                    <div class="event-meta">
+                        ${this.time
+                                ? html`<p class="event-time">${this.time}</p>`
+                                : null}
+                        ${this.location
+                                ? html`<p class="event-location">${this.location}</p>`
+                                : null}
+                    </div>
+                </div>
+
+                ${this.description
+                        ? html`
+                            <p class="event-description">
+                                ${this.description.length > 115
+                                        ? `${this.description.slice(0, 115)}…`
+                                        : this.description}
+                            </p>
+                        `
+                        : null}
             </div>
         `;
     }
 }
+

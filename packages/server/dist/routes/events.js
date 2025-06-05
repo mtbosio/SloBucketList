@@ -41,6 +41,10 @@ router.get("/:eventId", (req, res) => {
   const { eventId } = req.params;
   import_event_item_svc.default.get(eventId).then((eventItem) => res.json(eventItem)).catch((err) => res.status(404).send(err));
 });
+router.get("/creator/:creatorId", (req, res) => {
+  const { creatorId } = req.params;
+  import_event_item_svc.default.findByCreator(creatorId).then((list) => res.json(list)).catch((err) => res.status(500).send(err));
+});
 router.post("/", (req, res) => {
   const newEvent = req.body;
   import_event_item_svc.default.create(newEvent).then(
@@ -56,4 +60,18 @@ router.delete("/:eventId", (req, res) => {
   const { eventId } = req.params;
   import_event_item_svc.default.remove(eventId).then(() => res.status(204).end()).catch((err) => res.status(404).send(err));
 });
+router.post(
+  "/:eventId/rsvp/:userId",
+  (req, res) => {
+    const { eventId, userId } = req.params;
+    import_event_item_svc.default.addRsvp(eventId, userId).then((updatedEvent) => res.json(updatedEvent)).catch((err) => res.status(400).send(err.message));
+  }
+);
+router.delete(
+  "/:eventId/rsvp/:userId",
+  (req, res) => {
+    const { eventId, userId } = req.params;
+    import_event_item_svc.default.removeRsvp(eventId, userId).then((updatedEvent) => res.json(updatedEvent)).catch((err) => res.status(400).send(err.message));
+  }
+);
 var events_default = router;

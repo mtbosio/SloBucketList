@@ -24,7 +24,7 @@ router.post("/register", (req: Request, res: Response) => {
     } else {
         credentials
             .create(username, password)
-            .then((creds) => generateAccessToken(creds.username))
+            .then((creds) => generateAccessToken(creds.username, creds._id.toString()))
             .then((token) => {
                 res.status(201).send({ token: token });
             })
@@ -42,7 +42,7 @@ router.post("/login", (req: Request, res: Response) => {
     } else {
         credentials
             .verify(username, password)
-            .then((goodUser: string) => generateAccessToken(goodUser))
+            .then(({userId, username: verifiedUser} ) => generateAccessToken(verifiedUser, userId))
             .then((token) => res.status(200).send({ token: token }))
             .catch(() => res.status(401).send("Unauthorized"));
     }
@@ -68,11 +68,12 @@ export function authenticateUser(
 }
 
 function generateAccessToken(
-    username: string
+    username: string,
+    userId: string
 ): Promise<String> {
     return new Promise((resolve, reject) => {
         jwt.sign(
-            { username: username },
+            { userId, username: username },
             TOKEN_SECRET,
             { expiresIn: "1d" },
             (error, token) => {

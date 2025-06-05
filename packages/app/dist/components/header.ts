@@ -135,6 +135,9 @@ export class HeaderElement extends LitElement {
                 -webkit-transition: .4s;
                 transition: .4s;
             }
+            .sign-out {
+                float: right;
+            }
 
             input:checked + .slider {
                 background-color: var(--color-primary);
@@ -163,13 +166,13 @@ export class HeaderElement extends LitElement {
     renderSignOutButton() {
         return html`
         <li>
-        <button
-          @click=${(e: UIEvent) => {
-                Events.relay(e, "auth:message", ["auth/signout"])
-            }}
-        >
-          Sign Out
-        </button>
+            <a
+              @click=${(e: UIEvent) => {
+                    Events.relay(e, "auth:message", ["auth/signout"])
+                }}
+            >
+              Sign Out
+            </a>
         </li>
         `;
 
@@ -178,7 +181,7 @@ export class HeaderElement extends LitElement {
     renderSignInButton() {
         return html`
         <li>
-            <a href="/login">
+            <a href="/app/login">
               Sign In…
             </a>
         </li>
@@ -197,10 +200,20 @@ export class HeaderElement extends LitElement {
                 <nav>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/events">Events</a></li>
-                        <li><a href="/create-event">Create Event</a></li>
+                        ${this.loggedIn ? html`
+                        <li><a href="/app/my-events">Your Events</a></li>
+                        <li><a href="/app/create-event">Create Event</a></li>
+                        ` : null}
+       
+                        ${this.loggedIn ?
+                                this.renderSignOutButton() :
+                                this.renderSignInButton()
+                        }
                         
                         
+                        <li class="sign-out"><a slot="actuator">
+                            Hello, ${this.userid || "user"}
+                        </a></li>
                         <li class="dark-mode-switch">
                             <p>Dark Mode</p>
                             <label class="switch">
@@ -208,14 +221,6 @@ export class HeaderElement extends LitElement {
                                 <span class="slider"></span>
                             </label>
                         </li>
-                        <li><a slot="actuator">
-                            Hello, ${this.userid || "user"}
-                        </a></li>
-                        ${this.loggedIn ?
-                                this.renderSignOutButton() :
-                                this.renderSignInButton()
-                        }
-                        
                     </ul>
                 </nav>
             </header>
